@@ -5,7 +5,7 @@
         <name>Does_Enrollment_Exist</name>
         <label>Does Enrollment Exist?</label>
         <locationX>248</locationX>
-        <locationY>674</locationY>
+        <locationY>794</locationY>
         <defaultConnector>
             <targetReference>Create_Student_Connection</targetReference>
         </defaultConnector>
@@ -27,10 +27,35 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Does_Offering_Exist</name>
+        <label>Does Offering Exist?</label>
+        <locationX>479</locationX>
+        <locationY>554</locationY>
+        <defaultConnector>
+            <targetReference>Create_Offering_Lookup_Error</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Offering Does Not Exist</defaultConnectorLabel>
+        <rules>
+            <name>Offering_Exists</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Offering.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Lookup_Student_Enrollment</targetReference>
+            </connector>
+            <label>Offering Exists</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Is_Enrollment_Updatable</name>
         <label>Is Enrollment Updatable?</label>
         <locationX>50</locationX>
-        <locationY>794</locationY>
+        <locationY>914</locationY>
         <defaultConnector>
             <targetReference>Set_Student_Status_to_Enrolled</targetReference>
         </defaultConnector>
@@ -51,7 +76,7 @@
     <decisions>
         <name>Is_this_a_Noncredit_User_Id</name>
         <label>Is this a Noncredit User Id?</label>
-        <locationX>479</locationX>
+        <locationX>726</locationX>
         <locationY>314</locationY>
         <defaultConnectorLabel>Noncredit Id Missing</defaultConnectorLabel>
         <rules>
@@ -93,10 +118,42 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordCreates>
+        <name>Create_Offering_Lookup_Error</name>
+        <label>Create Offering Lookup Error</label>
+        <locationX>710</locationX>
+        <locationY>674</locationY>
+        <inputAssignments>
+            <field>hed__Error_Type__c</field>
+            <value>
+                <stringValue>Object Not Found</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Full_Message__c</field>
+            <value>
+                <stringValue>Lookup of course offering failed.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Object_Type__c</field>
+            <value>
+                <stringValue>hed__Course_Offering__c </stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Stack_Trace__c</field>
+            <value>
+                <elementReference>$Record.csuoee__Section_Reference__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>hed__Error__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
         <name>Create_Student_Connection</name>
         <label>Create Student Connection</label>
         <locationX>446</locationX>
-        <locationY>794</locationY>
+        <locationY>914</locationY>
         <inputAssignments>
             <field>hed__Contact__c</field>
             <value>
@@ -121,11 +178,11 @@
     <recordLookups>
         <name>Get_Offering</name>
         <label>Get Offering</label>
-        <locationX>248</locationX>
+        <locationX>479</locationX>
         <locationY>434</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Lookup_Student_Enrollment</targetReference>
+            <targetReference>Does_Offering_Exist</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -143,7 +200,7 @@
     <recordLookups>
         <name>Get_User_by_Noncredit_Id</name>
         <label>Get User by Noncredit Id</label>
-        <locationX>479</locationX>
+        <locationX>726</locationX>
         <locationY>194</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -166,19 +223,12 @@
         <name>Lookup_Student_Enrollment</name>
         <label>Lookup Student Enrollment</label>
         <locationX>248</locationX>
-        <locationY>554</locationY>
+        <locationY>674</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Does_Enrollment_Exist</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
-        <filters>
-            <field>hed__Contact__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>Get_User_by_Noncredit_Id.Id</elementReference>
-            </value>
-        </filters>
         <filters>
             <field>hed__Course_Offering__c</field>
             <operator>EqualTo</operator>
@@ -186,16 +236,24 @@
                 <elementReference>Get_Offering.Id</elementReference>
             </value>
         </filters>
+        <filters>
+            <field>hed__Contact__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_User_by_Noncredit_Id.Id</elementReference>
+            </value>
+        </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>hed__Course_Enrollment__c</object>
         <queriedFields>Id</queriedFields>
+        <queriedFields>hed__Status__c</queriedFields>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
         <name>Set_Student_Status_to_Enrolled</name>
         <label>Set Student Status to Enrolled</label>
         <locationX>182</locationX>
-        <locationY>914</locationY>
+        <locationY>1034</locationY>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -213,7 +271,7 @@
         <object>hed__Course_Enrollment__c</object>
     </recordUpdates>
     <start>
-        <locationX>353</locationX>
+        <locationX>600</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_User_by_Noncredit_Id</targetReference>
