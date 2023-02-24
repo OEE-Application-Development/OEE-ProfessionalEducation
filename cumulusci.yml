@@ -1,0 +1,28 @@
+minimum_cumulusci_version: '3.73.0'
+project:
+    name: OEE-ProfessionalEducation
+    package:
+        name: OEE-ProfessionalEducation
+        namespace: csuoee
+        api_version: '57.0'
+    dependencies:
+        - github: 'https://github.com/OEE-Application-Development/OEE-EDA-Base'
+    git:
+        default_branch: 'main'
+    source_format: sfdx
+
+tasks:
+    robot:
+        options:
+            suites: robot/OEE-ProfessionalEducation/tests
+            options:
+                outputdir: robot/OEE-ProfessionalEducation/results
+
+    robot_testdoc:
+        options:
+            path: robot/OEE-ProfessionalEducation/tests
+            output: robot/OEE-ProfessionalEducation/doc/OEE-ProfessionalEducation_tests.html
+
+    run_tests:
+        options:
+            required_org_code_coverage_percent: 75
