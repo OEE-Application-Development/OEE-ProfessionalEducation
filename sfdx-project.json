@@ -1,1 +1,22 @@
-{"packageDirectories": [{"path": "force-app", "default": true}], "namespace": "csuoee", "sourceApiVersion": "57.0"}
+{
+    "packageDirectories": [
+        {
+            "package": "OEE-ProfessionalEducation", 
+            "versionNumber": "0.1.0.NEXT", 
+            "path": "force-app", 
+            "definitionFile": "orgs/release.json",
+            "default": true,
+            "dependencies": [
+                {"package": "04t1R0000016bHcQAI"},
+                {"package": "04t5b000002BQXAAA4"},
+                {"package": "04tDn000000zGhHIAU"}
+            ]
+        }
+    ], 
+    "name": "OEE-ProfessionalEducation",
+    "namespace": "csuoee", 
+    "packageAliases": {
+        "OEE-ProfessionalEducation": "0Ho5b000000oLm1CAE"
+    },
+    "sourceApiVersion": "57.0"
+}
