@@ -4,7 +4,7 @@
     <assignments>
         <name>Set_Course_Fields</name>
         <label>Set Course Fields</label>
-        <locationX>314</locationX>
+        <locationX>578</locationX>
         <locationY>1130</locationY>
         <assignmentItems>
             <assignToReference>Course_Lookup.csuoee__Short_Description__c</assignToReference>
@@ -69,7 +69,7 @@
     <decisions>
         <name>Create_or_Update_Check</name>
         <label>Create or Update Check</label>
-        <locationX>248</locationX>
+        <locationX>380</locationX>
         <locationY>890</locationY>
         <defaultConnector>
             <targetReference>Is_this_a_Noncredit_Course</targetReference>
@@ -94,7 +94,7 @@
     <decisions>
         <name>Found_Department</name>
         <label>Found Department?</label>
-        <locationX>248</locationX>
+        <locationX>380</locationX>
         <locationY>554</locationY>
         <defaultConnector>
             <targetReference>Create_or_Update_Check</targetReference>
@@ -119,8 +119,11 @@
     <decisions>
         <name>Is_this_a_Noncredit_Course</name>
         <label>Is this a Noncredit Course</label>
-        <locationX>446</locationX>
+        <locationX>710</locationX>
         <locationY>1010</locationY>
+        <defaultConnector>
+            <targetReference>Create_Course_Update_Error</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>Credit</defaultConnectorLabel>
         <rules>
             <name>Noncredit</name>
@@ -180,12 +183,9 @@
         <label>Create Course</label>
         <locationX>50</locationX>
         <locationY>1130</locationY>
-        <inputAssignments>
-            <field>csuoee__Course_Code__c</field>
-            <value>
-                <elementReference>$Record.Course_Code__c</elementReference>
-            </value>
-        </inputAssignments>
+        <faultConnector>
+            <targetReference>Create_Course_Create_Error</targetReference>
+        </faultConnector>
         <inputAssignments>
             <field>Name</field>
             <value>
@@ -196,6 +196,12 @@
             <field>RecordTypeId</field>
             <value>
                 <elementReference>Get_Noncredit_Course_RecordType_Id.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>csuoee__Course_Code__c</field>
+            <value>
+                <elementReference>$Record.Course_Code__c</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -243,10 +249,74 @@
         <object>hed__Course__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
+    <recordCreates>
+        <name>Create_Course_Create_Error</name>
+        <label>Create Course Create Error</label>
+        <locationX>314</locationX>
+        <locationY>1250</locationY>
+        <inputAssignments>
+            <field>hed__Error_Type__c</field>
+            <value>
+                <stringValue>Create Object</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Full_Message__c</field>
+            <value>
+                <stringValue>Failed to create Course.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Object_Type__c</field>
+            <value>
+                <stringValue>hed__Course__c</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Stack_Trace__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <object>hed__Error__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Course_Update_Error</name>
+        <label>Create Course Update Error</label>
+        <locationX>842</locationX>
+        <locationY>1130</locationY>
+        <inputAssignments>
+            <field>hed__Error_Type__c</field>
+            <value>
+                <stringValue>Update Object</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Full_Message__c</field>
+            <value>
+                <stringValue>Failed to update Course.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Object_Type__c</field>
+            <value>
+                <stringValue>hed__Course__c</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Stack_Trace__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <object>hed__Error__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
     <recordLookups>
         <name>Course_Lookup</name>
         <label>Course Lookup</label>
-        <locationX>248</locationX>
+        <locationX>380</locationX>
         <locationY>194</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -267,7 +337,7 @@
     <recordLookups>
         <name>Get_Department</name>
         <label>Get Department</label>
-        <locationX>248</locationX>
+        <locationX>380</locationX>
         <locationY>434</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -303,7 +373,7 @@
     <recordLookups>
         <name>Get_Department_RecordType</name>
         <label>Get Department RecordType</label>
-        <locationX>248</locationX>
+        <locationX>380</locationX>
         <locationY>314</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -361,7 +431,7 @@
     <recordLookups>
         <name>Get_PE_Department</name>
         <label>Get PE Department</label>
-        <locationX>116</locationX>
+        <locationX>248</locationX>
         <locationY>674</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -391,12 +461,12 @@
     <recordUpdates>
         <name>Update_Course</name>
         <label>Update Course</label>
-        <locationX>314</locationX>
+        <locationX>578</locationX>
         <locationY>1250</locationY>
         <inputReference>Course_Lookup</inputReference>
     </recordUpdates>
     <start>
-        <locationX>122</locationX>
+        <locationX>254</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Course_Lookup</targetReference>
