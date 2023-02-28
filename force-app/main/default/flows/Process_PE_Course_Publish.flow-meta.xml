@@ -5,7 +5,7 @@
         <name>Set_Course_Fields</name>
         <label>Set Course Fields</label>
         <locationX>578</locationX>
-        <locationY>1130</locationY>
+        <locationY>1394</locationY>
         <assignmentItems>
             <assignToReference>Course_Lookup.csuoee__Short_Description__c</assignToReference>
             <operator>Assign</operator>
@@ -69,8 +69,8 @@
     <decisions>
         <name>Create_or_Update_Check</name>
         <label>Create or Update Check</label>
-        <locationX>380</locationX>
-        <locationY>890</locationY>
+        <locationX>446</locationX>
+        <locationY>1154</locationY>
         <defaultConnector>
             <targetReference>Is_this_a_Noncredit_Course</targetReference>
         </defaultConnector>
@@ -94,7 +94,7 @@
     <decisions>
         <name>Found_Department</name>
         <label>Found Department?</label>
-        <locationX>380</locationX>
+        <locationX>446</locationX>
         <locationY>554</locationY>
         <defaultConnector>
             <targetReference>Create_or_Update_Check</targetReference>
@@ -119,8 +119,8 @@
     <decisions>
         <name>Is_this_a_Noncredit_Course</name>
         <label>Is this a Noncredit Course</label>
-        <locationX>710</locationX>
-        <locationY>1010</locationY>
+        <locationX>842</locationX>
+        <locationY>1274</locationY>
         <defaultConnector>
             <targetReference>Create_Course_Update_Error</targetReference>
         </defaultConnector>
@@ -182,7 +182,7 @@
         <name>Create_Course</name>
         <label>Create Course</label>
         <locationX>50</locationX>
-        <locationY>1130</locationY>
+        <locationY>1394</locationY>
         <faultConnector>
             <targetReference>Create_Course_Create_Error</targetReference>
         </faultConnector>
@@ -253,7 +253,7 @@
         <name>Create_Course_Create_Error</name>
         <label>Create Course Create Error</label>
         <locationX>314</locationX>
-        <locationY>1250</locationY>
+        <locationY>1514</locationY>
         <inputAssignments>
             <field>hed__Error_Type__c</field>
             <value>
@@ -282,10 +282,170 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
+        <name>Create_Course_Lookup_Error</name>
+        <label>Create Course Lookup Error</label>
+        <locationX>1898</locationX>
+        <locationY>314</locationY>
+        <inputAssignments>
+            <field>hed__Error_Type__c</field>
+            <value>
+                <stringValue>Object Lookup</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Full_Message__c</field>
+            <value>
+                <stringValue>Failed to lookup Course.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Object_Type__c</field>
+            <value>
+                <stringValue>hed__Course__c</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Stack_Trace__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <object>hed__Error__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
         <name>Create_Course_Update_Error</name>
         <label>Create Course Update Error</label>
+        <locationX>1106</locationX>
+        <locationY>1394</locationY>
+        <inputAssignments>
+            <field>hed__Error_Type__c</field>
+            <value>
+                <stringValue>Update Object</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Full_Message__c</field>
+            <value>
+                <stringValue>Failed to update Course.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Object_Type__c</field>
+            <value>
+                <stringValue>hed__Course__c</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Stack_Trace__c</field>
+            <value>
+                <stringValue>A noncredit course was found, but the update record is marked as credit!</stringValue>
+            </value>
+        </inputAssignments>
+        <object>hed__Error__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Lookup_Department_Error</name>
+        <label>Create Lookup Department Error</label>
+        <locationX>1370</locationX>
+        <locationY>554</locationY>
+        <inputAssignments>
+            <field>hed__Error_Type__c</field>
+            <value>
+                <stringValue>Object Lookup</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Full_Message__c</field>
+            <value>
+                <stringValue>Failed to lookup Department.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Object_Type__c</field>
+            <value>
+                <stringValue>Account</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Stack_Trace__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <object>hed__Error__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Lookup_Department_RecordType_Error</name>
+        <label>Create Lookup Department RecordType Error</label>
+        <locationX>1634</locationX>
+        <locationY>434</locationY>
+        <inputAssignments>
+            <field>hed__Error_Type__c</field>
+            <value>
+                <stringValue>Object Lookup</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Full_Message__c</field>
+            <value>
+                <stringValue>Failed to lookup Department Record Type.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Object_Type__c</field>
+            <value>
+                <stringValue>RecordType</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Stack_Trace__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <object>hed__Error__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Lookup_PE_Department_Error</name>
+        <label>Create Lookup PE Department Error</label>
+        <locationX>446</locationX>
+        <locationY>794</locationY>
+        <inputAssignments>
+            <field>hed__Error_Type__c</field>
+            <value>
+                <stringValue>Object Lookup</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Full_Message__c</field>
+            <value>
+                <stringValue>Failed to lookup PE Department.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Object_Type__c</field>
+            <value>
+                <stringValue>Account</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Stack_Trace__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <object>hed__Error__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_NC_Course_Update_Error</name>
+        <label>Create NC Course Update Error</label>
         <locationX>842</locationX>
-        <locationY>1130</locationY>
+        <locationY>1634</locationY>
         <inputAssignments>
             <field>hed__Error_Type__c</field>
             <value>
@@ -316,12 +476,15 @@
     <recordLookups>
         <name>Course_Lookup</name>
         <label>Course Lookup</label>
-        <locationX>380</locationX>
+        <locationX>446</locationX>
         <locationY>194</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Department_RecordType</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Create_Course_Lookup_Error</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>csuoee__Course_Code__c</field>
@@ -337,12 +500,15 @@
     <recordLookups>
         <name>Get_Department</name>
         <label>Get Department</label>
-        <locationX>380</locationX>
+        <locationX>446</locationX>
         <locationY>434</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Found_Department</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Create_Lookup_Department_Error</targetReference>
+        </faultConnector>
         <filterLogic>(1 OR 2) AND 3</filterLogic>
         <filters>
             <field>hed__School_Code__c</field>
@@ -373,12 +539,15 @@
     <recordLookups>
         <name>Get_Department_RecordType</name>
         <label>Get Department RecordType</label>
-        <locationX>380</locationX>
+        <locationX>446</locationX>
         <locationY>314</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Department</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Create_Lookup_Department_RecordType_Error</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>SobjectType</field>
@@ -403,7 +572,7 @@
         <name>Get_Noncredit_Course_RecordType_Id</name>
         <label>Get Noncredit Course RecordType Id</label>
         <locationX>50</locationX>
-        <locationY>1010</locationY>
+        <locationY>1274</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Create_Course</targetReference>
@@ -431,12 +600,15 @@
     <recordLookups>
         <name>Get_PE_Department</name>
         <label>Get PE Department</label>
-        <locationX>248</locationX>
+        <locationX>182</locationX>
         <locationY>674</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Create_or_Update_Check</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Create_Lookup_PE_Department_Error</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Name</field>
@@ -462,11 +634,14 @@
         <name>Update_Course</name>
         <label>Update Course</label>
         <locationX>578</locationX>
-        <locationY>1250</locationY>
+        <locationY>1514</locationY>
+        <faultConnector>
+            <targetReference>Create_NC_Course_Update_Error</targetReference>
+        </faultConnector>
         <inputReference>Course_Lookup</inputReference>
     </recordUpdates>
     <start>
-        <locationX>254</locationX>
+        <locationX>320</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Course_Lookup</targetReference>

@@ -55,7 +55,7 @@
     <assignments>
         <name>Update_Contact_Fields</name>
         <label>Update Contact Fields</label>
-        <locationX>1590</locationX>
+        <locationX>2250</locationX>
         <locationY>1370</locationY>
         <assignmentItems>
             <assignToReference>ContactToUpdate.Birthdate</assignToReference>
@@ -120,7 +120,7 @@
     <decisions>
         <name>Contact_Email_Exists</name>
         <label>Contact Email Exists?</label>
-        <locationX>1370</locationX>
+        <locationX>1898</locationX>
         <locationY>674</locationY>
         <defaultConnector>
             <targetReference>Update_Contact_Fields</targetReference>
@@ -170,7 +170,7 @@
     <decisions>
         <name>Is_this_a_Company_Account</name>
         <label>Is this a Company Account?</label>
-        <locationX>952</locationX>
+        <locationX>1282</locationX>
         <locationY>194</locationY>
         <defaultConnector>
             <targetReference>Get_Contact_By_Noncredit_Id</targetReference>
@@ -195,7 +195,7 @@
     <decisions>
         <name>Noncredit_ID_Exists</name>
         <label>Noncredit ID Exists?</label>
-        <locationX>1590</locationX>
+        <locationX>2250</locationX>
         <locationY>434</locationY>
         <defaultConnector>
             <targetReference>Update_Contact_Fields</targetReference>
@@ -404,7 +404,7 @@
     <recordCreates>
         <name>Create_Contact_Create_Error</name>
         <label>Create Contact Create Error</label>
-        <locationX>1370</locationX>
+        <locationX>1898</locationX>
         <locationY>914</locationY>
         <inputAssignments>
             <field>hed__Error_Type__c</field>
@@ -436,7 +436,7 @@
     <recordCreates>
         <name>Create_Contact_Record</name>
         <label>Create Contact Record</label>
-        <locationX>1106</locationX>
+        <locationX>1634</locationX>
         <locationY>794</locationY>
         <faultConnector>
             <targetReference>Create_Contact_Create_Error</targetReference>
@@ -531,7 +531,7 @@
     <recordCreates>
         <name>Create_Contact_Update_Error</name>
         <label>Create Contact Update Error</label>
-        <locationX>1986</locationX>
+        <locationX>2778</locationX>
         <locationY>1610</locationY>
         <inputAssignments>
             <field>hed__Error_Type__c</field>
@@ -560,6 +560,134 @@
         <object>hed__Error__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
+    <recordCreates>
+        <name>Create_Lookup_Account_By_Email_Error</name>
+        <label>Create Lookup Account By Email Error</label>
+        <locationX>2338</locationX>
+        <locationY>674</locationY>
+        <inputAssignments>
+            <field>hed__Error_Type__c</field>
+            <value>
+                <stringValue>Object Lookup</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Full_Message__c</field>
+            <value>
+                <stringValue>Failed to lookup Contact.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Object_Type__c</field>
+            <value>
+                <stringValue>Contact</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Stack_Trace__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <object>hed__Error__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Lookup_Account_By_NC_Id_Error</name>
+        <label>Create Lookup Account By NC Id Error</label>
+        <locationX>3042</locationX>
+        <locationY>434</locationY>
+        <inputAssignments>
+            <field>hed__Error_Type__c</field>
+            <value>
+                <stringValue>Object Lookup</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Full_Message__c</field>
+            <value>
+                <stringValue>Failed to lookup Contact.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Object_Type__c</field>
+            <value>
+                <stringValue>Contact</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Stack_Trace__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <object>hed__Error__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Lookup_Business_Account_Error</name>
+        <label>Create Lookup Business Account Error</label>
+        <locationX>1370</locationX>
+        <locationY>434</locationY>
+        <inputAssignments>
+            <field>hed__Error_Type__c</field>
+            <value>
+                <stringValue>Object Lookup</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Full_Message__c</field>
+            <value>
+                <stringValue>Failed to lookup Account.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Object_Type__c</field>
+            <value>
+                <stringValue>Account</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Stack_Trace__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <object>hed__Error__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Lookup_Business_RecordType_Error</name>
+        <label>Create Lookup Business RecordType Error</label>
+        <locationX>1106</locationX>
+        <locationY>674</locationY>
+        <inputAssignments>
+            <field>hed__Error_Type__c</field>
+            <value>
+                <stringValue>Object Lookup</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Full_Message__c</field>
+            <value>
+                <stringValue>Failed to lookup Business RecordType.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Object_Type__c</field>
+            <value>
+                <stringValue>RecordType</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Stack_Trace__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <object>hed__Error__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
     <recordLookups>
         <name>Get_Business_Organization_RecordTypeId</name>
         <label>Get Business_Organization RecordTypeId</label>
@@ -569,6 +697,9 @@
         <connector>
             <targetReference>Create_Business_Account</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Create_Lookup_Business_RecordType_Error</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>SobjectType</field>
@@ -591,12 +722,15 @@
     <recordLookups>
         <name>Get_Contact_By_Email</name>
         <label>Get Contact By Email</label>
-        <locationX>1370</locationX>
+        <locationX>1898</locationX>
         <locationY>554</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Contact_Email_Exists</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Create_Lookup_Account_By_Email_Error</targetReference>
+        </faultConnector>
         <filterLogic>or</filterLogic>
         <filters>
             <field>Email</field>
@@ -640,12 +774,15 @@
     <recordLookups>
         <name>Get_Contact_By_Noncredit_Id</name>
         <label>Get Contact By Noncredit Id</label>
-        <locationX>1590</locationX>
+        <locationX>2250</locationX>
         <locationY>314</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Noncredit_ID_Exists</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Create_Lookup_Account_By_NC_Id_Error</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Noncredit_ID__c</field>
@@ -667,6 +804,9 @@
         <connector>
             <targetReference>Does_Company_Already_Exist</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Create_Lookup_Business_Account_Error</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>hed__School_Code__c</field>
@@ -682,7 +822,7 @@
     <recordUpdates>
         <name>Run_Contact_Update</name>
         <label>Run Contact Update</label>
-        <locationX>1590</locationX>
+        <locationX>2250</locationX>
         <locationY>1490</locationY>
         <faultConnector>
             <targetReference>Create_Contact_Update_Error</targetReference>
@@ -700,7 +840,7 @@
         <inputReference>Lookup_Business_Account</inputReference>
     </recordUpdates>
     <start>
-        <locationX>826</locationX>
+        <locationX>1156</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Is_this_a_Company_Account</targetReference>
