@@ -4,7 +4,7 @@
     <assignments>
         <name>Set_Course_Offering_Fields</name>
         <label>Set Course Offering Fields</label>
-        <locationX>380</locationX>
+        <locationX>578</locationX>
         <locationY>1802</locationY>
         <assignmentItems>
             <assignToReference>Get_Course_Offering.hed__Capacity__c</assignToReference>
@@ -104,7 +104,7 @@
     <decisions>
         <name>Create_or_Update_Check</name>
         <label>Create or Update Check</label>
-        <locationX>248</locationX>
+        <locationX>314</locationX>
         <locationY>1682</locationY>
         <defaultConnector>
             <targetReference>Set_Course_Offering_Fields</targetReference>
@@ -129,7 +129,7 @@
     <decisions>
         <name>Delivery_Decision</name>
         <label>Delivery Decision</label>
-        <locationX>248</locationX>
+        <locationX>314</locationX>
         <locationY>554</locationY>
         <defaultConnector>
             <targetReference>Get_Building</targetReference>
@@ -168,7 +168,7 @@
     <decisions>
         <name>Does_Building_Require_Create</name>
         <label>Does Building Require Create?</label>
-        <locationX>446</locationX>
+        <locationX>512</locationX>
         <locationY>794</locationY>
         <defaultConnector>
             <targetReference>Faculty_has_CSU_ID</targetReference>
@@ -193,7 +193,7 @@
     <decisions>
         <name>Faculty_has_CSU_ID</name>
         <label>Faculty has CSU ID?</label>
-        <locationX>248</locationX>
+        <locationX>314</locationX>
         <locationY>1346</locationY>
         <defaultConnector>
             <targetReference>Create_or_Update_Check</targetReference>
@@ -218,7 +218,7 @@
     <decisions>
         <name>Is_this_Course_Noncredit</name>
         <label>Is this Course Noncredit?</label>
-        <locationX>501</locationX>
+        <locationX>710</locationX>
         <locationY>314</locationY>
         <defaultConnectorLabel>Credit</defaultConnectorLabel>
         <rules>
@@ -267,7 +267,7 @@
     <recordCreates>
         <name>Create_Building</name>
         <label>Create Building</label>
-        <locationX>314</locationX>
+        <locationX>380</locationX>
         <locationY>1034</locationY>
         <assignRecordIdToReference>FacilityId</assignRecordIdToReference>
         <connector>
@@ -296,8 +296,11 @@
     <recordCreates>
         <name>Create_Course_Offering</name>
         <label>Create Course Offering</label>
-        <locationX>116</locationX>
+        <locationX>50</locationX>
         <locationY>2042</locationY>
+        <faultConnector>
+            <targetReference>Create_Section_Create_Error</targetReference>
+        </faultConnector>
         <inputAssignments>
             <field>Name</field>
             <value>
@@ -361,10 +364,74 @@
         <object>hed__Course_Offering__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
+    <recordCreates>
+        <name>Create_Section_Create_Error</name>
+        <label>Create Section Create Error</label>
+        <locationX>314</locationX>
+        <locationY>2162</locationY>
+        <inputAssignments>
+            <field>hed__Error_Type__c</field>
+            <value>
+                <stringValue>Object Create</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Full_Message__c</field>
+            <value>
+                <stringValue>Failed to create Course Offering.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Object_Type__c</field>
+            <value>
+                <stringValue>hed__Course_Offering__c</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Stack_Trace__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <object>hed__Error__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Section_Update_Error</name>
+        <label>Create Section Update Error</label>
+        <locationX>842</locationX>
+        <locationY>2042</locationY>
+        <inputAssignments>
+            <field>hed__Error_Type__c</field>
+            <value>
+                <stringValue>Object Update</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Full_Message__c</field>
+            <value>
+                <stringValue>Failed to update Course Offering.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Object_Type__c</field>
+            <value>
+                <stringValue>hed__Course_Offering__c</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Stack_Trace__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <object>hed__Error__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
     <recordLookups>
         <name>Get_Building</name>
         <label>Get Building</label>
-        <locationX>446</locationX>
+        <locationX>512</locationX>
         <locationY>674</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -394,7 +461,7 @@
     <recordLookups>
         <name>Get_Canvas_Facility</name>
         <label>Get Canvas Facility</label>
-        <locationX>50</locationX>
+        <locationX>116</locationX>
         <locationY>674</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -417,7 +484,7 @@
     <recordLookups>
         <name>Get_Course</name>
         <label>Get Course</label>
-        <locationX>501</locationX>
+        <locationX>710</locationX>
         <locationY>194</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -438,7 +505,7 @@
     <recordLookups>
         <name>Get_Course_Offering</name>
         <label>Get Course Offering</label>
-        <locationX>248</locationX>
+        <locationX>314</locationX>
         <locationY>434</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -466,7 +533,7 @@
     <recordLookups>
         <name>Get_CSU_by_School_Code</name>
         <label>Get CSU by School Code</label>
-        <locationX>314</locationX>
+        <locationX>380</locationX>
         <locationY>914</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -488,7 +555,7 @@
     <recordLookups>
         <name>Get_Noncredit_Term_RecordType</name>
         <label>Get Noncredit Term RecordType</label>
-        <locationX>116</locationX>
+        <locationX>50</locationX>
         <locationY>1802</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -517,7 +584,7 @@
     <recordLookups>
         <name>Get_Term</name>
         <label>Get Term</label>
-        <locationX>116</locationX>
+        <locationX>50</locationX>
         <locationY>1922</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -546,7 +613,7 @@
     <recordLookups>
         <name>Lookup_Faculty_Contact</name>
         <label>Lookup Faculty Contact</label>
-        <locationX>116</locationX>
+        <locationX>182</locationX>
         <locationY>1466</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -569,12 +636,15 @@
     <recordUpdates>
         <name>Update_Course_Offering</name>
         <label>Update Course Offering</label>
-        <locationX>380</locationX>
+        <locationX>578</locationX>
         <locationY>1922</locationY>
+        <faultConnector>
+            <targetReference>Create_Section_Update_Error</targetReference>
+        </faultConnector>
         <inputReference>Get_Course_Offering</inputReference>
     </recordUpdates>
     <start>
-        <locationX>375</locationX>
+        <locationX>584</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Course</targetReference>

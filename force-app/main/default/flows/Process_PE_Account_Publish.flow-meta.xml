@@ -55,8 +55,8 @@
     <assignments>
         <name>Update_Contact_Fields</name>
         <label>Update Contact Fields</label>
-        <locationX>864</locationX>
-        <locationY>1226</locationY>
+        <locationX>1590</locationX>
+        <locationY>1370</locationY>
         <assignmentItems>
             <assignToReference>ContactToUpdate.Birthdate</assignToReference>
             <operator>Assign</operator>
@@ -120,7 +120,7 @@
     <decisions>
         <name>Contact_Email_Exists</name>
         <label>Contact Email Exists?</label>
-        <locationX>710</locationX>
+        <locationX>1370</locationX>
         <locationY>674</locationY>
         <defaultConnector>
             <targetReference>Update_Contact_Fields</targetReference>
@@ -145,7 +145,7 @@
     <decisions>
         <name>Does_Company_Already_Exist</name>
         <label>Does Company Already Exist?</label>
-        <locationX>182</locationX>
+        <locationX>314</locationX>
         <locationY>434</locationY>
         <defaultConnector>
             <targetReference>Get_Business_Organization_RecordTypeId</targetReference>
@@ -170,7 +170,7 @@
     <decisions>
         <name>Is_this_a_Company_Account</name>
         <label>Is this a Company Account?</label>
-        <locationX>523</locationX>
+        <locationX>952</locationX>
         <locationY>194</locationY>
         <defaultConnector>
             <targetReference>Get_Contact_By_Noncredit_Id</targetReference>
@@ -195,7 +195,7 @@
     <decisions>
         <name>Noncredit_ID_Exists</name>
         <label>Noncredit ID Exists?</label>
-        <locationX>864</locationX>
+        <locationX>1590</locationX>
         <locationY>434</locationY>
         <defaultConnector>
             <targetReference>Update_Contact_Fields</targetReference>
@@ -287,8 +287,11 @@
     <recordCreates>
         <name>Create_Business_Account</name>
         <label>Create Business Account</label>
-        <locationX>314</locationX>
+        <locationX>578</locationX>
         <locationY>674</locationY>
+        <faultConnector>
+            <targetReference>Create_Company_Account_Create_Error</targetReference>
+        </faultConnector>
         <inputAssignments>
             <field>BillingCity</field>
             <value>
@@ -335,10 +338,109 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
+        <name>Create_Company_Account_Create_Error</name>
+        <label>Create Company Account Create Error</label>
+        <locationX>842</locationX>
+        <locationY>794</locationY>
+        <inputAssignments>
+            <field>hed__Error_Type__c</field>
+            <value>
+                <stringValue>Object Create</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Full_Message__c</field>
+            <value>
+                <stringValue>Failed to create Company Account.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Object_Type__c</field>
+            <value>
+                <stringValue>Account</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Stack_Trace__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <object>hed__Error__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Company_Account_Update_Error</name>
+        <label>Create Company Account Update Error</label>
+        <locationX>314</locationX>
+        <locationY>794</locationY>
+        <inputAssignments>
+            <field>hed__Error_Type__c</field>
+            <value>
+                <stringValue>Update Object</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Full_Message__c</field>
+            <value>
+                <stringValue>Failed to update Company Account.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Object_Type__c</field>
+            <value>
+                <stringValue>Account</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Stack_Trace__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <object>hed__Error__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Contact_Create_Error</name>
+        <label>Create Contact Create Error</label>
+        <locationX>1370</locationX>
+        <locationY>914</locationY>
+        <inputAssignments>
+            <field>hed__Error_Type__c</field>
+            <value>
+                <stringValue>Object Create</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Full_Message__c</field>
+            <value>
+                <stringValue>Failed to create Contact.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Object_Type__c</field>
+            <value>
+                <stringValue>Contact</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Stack_Trace__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <object>hed__Error__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
         <name>Create_Contact_Record</name>
         <label>Create Contact Record</label>
-        <locationX>578</locationX>
+        <locationX>1106</locationX>
         <locationY>794</locationY>
+        <faultConnector>
+            <targetReference>Create_Contact_Create_Error</targetReference>
+        </faultConnector>
         <inputAssignments>
             <field>Birthdate</field>
             <value>
@@ -426,10 +528,42 @@
         <object>Contact</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
+    <recordCreates>
+        <name>Create_Contact_Update_Error</name>
+        <label>Create Contact Update Error</label>
+        <locationX>1986</locationX>
+        <locationY>1610</locationY>
+        <inputAssignments>
+            <field>hed__Error_Type__c</field>
+            <value>
+                <stringValue>Object Update</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Full_Message__c</field>
+            <value>
+                <stringValue>Failed to update Contact.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Object_Type__c</field>
+            <value>
+                <stringValue>Contact</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>hed__Stack_Trace__c</field>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <object>hed__Error__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
     <recordLookups>
         <name>Get_Business_Organization_RecordTypeId</name>
         <label>Get Business_Organization RecordTypeId</label>
-        <locationX>314</locationX>
+        <locationX>578</locationX>
         <locationY>554</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -457,7 +591,7 @@
     <recordLookups>
         <name>Get_Contact_By_Email</name>
         <label>Get Contact By Email</label>
-        <locationX>710</locationX>
+        <locationX>1370</locationX>
         <locationY>554</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -506,7 +640,7 @@
     <recordLookups>
         <name>Get_Contact_By_Noncredit_Id</name>
         <label>Get Contact By Noncredit Id</label>
-        <locationX>864</locationX>
+        <locationX>1590</locationX>
         <locationY>314</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -527,7 +661,7 @@
     <recordLookups>
         <name>Lookup_Business_Account</name>
         <label>Lookup Business Account</label>
-        <locationX>182</locationX>
+        <locationX>314</locationX>
         <locationY>314</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -548,8 +682,11 @@
     <recordUpdates>
         <name>Run_Contact_Update</name>
         <label>Run Contact Update</label>
-        <locationX>864</locationX>
-        <locationY>1346</locationY>
+        <locationX>1590</locationX>
+        <locationY>1490</locationY>
+        <faultConnector>
+            <targetReference>Create_Contact_Update_Error</targetReference>
+        </faultConnector>
         <inputReference>ContactToUpdate</inputReference>
     </recordUpdates>
     <recordUpdates>
@@ -557,10 +694,13 @@
         <label>Update Company Account</label>
         <locationX>50</locationX>
         <locationY>674</locationY>
+        <faultConnector>
+            <targetReference>Create_Company_Account_Update_Error</targetReference>
+        </faultConnector>
         <inputReference>Lookup_Business_Account</inputReference>
     </recordUpdates>
     <start>
-        <locationX>397</locationX>
+        <locationX>826</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Is_this_a_Company_Account</targetReference>
